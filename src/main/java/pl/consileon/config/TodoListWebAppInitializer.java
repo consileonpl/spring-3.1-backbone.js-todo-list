@@ -1,6 +1,7 @@
 package pl.consileon.config;
 
 import org.springframework.web.WebApplicationInitializer;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 
@@ -10,11 +11,11 @@ import javax.servlet.ServletRegistration;
 
 public class TodoListWebAppInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
-        AnnotationConfigWebApplicationContext ctx = new AnnotationConfigWebApplicationContext();
-        ctx.register(AppConfig.class, WebConfig.class);
+        AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
+        dispatcherContext.register(WebConfig.class);
 
-        ServletRegistration.Dynamic dispatcherServlet = servletContext.addServlet("dispatcher", new DispatcherServlet(ctx));
+        ServletRegistration.Dynamic dispatcherServlet = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcherServlet.setLoadOnStartup(1);
-        dispatcherServlet.addMapping("/");
+        dispatcherServlet.addMapping("/*");
     }
 }

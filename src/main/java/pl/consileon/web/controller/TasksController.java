@@ -1,4 +1,4 @@
-package pl.consileon.controller;
+package pl.consileon.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
