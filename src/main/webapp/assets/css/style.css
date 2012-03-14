@@ -51,12 +51,12 @@ html {
 }
 
 body {
-    width: 1000px;
+    width: 800px;
     margin: 0 auto;
     padding: 50px;
     background: white;
     border-radius: 15px;
-    border: 1px solid #f0f0f0;
+    border: 1px solid #c0c0c0;
 }
 
 header h1 {
@@ -70,7 +70,7 @@ footer {
     text-align: center;
     font-size: 0.6em;
     margin-top: 40px;
-    color: #ccc;
+    color: #999;
 }
 
 form {
@@ -88,6 +88,37 @@ input[type='text'] {
     box-shadow: 0 5px 10px #e0e0e0 inset;
 }
 
+ul {
+    border: 1px solid #c0c0c0;
+    margin: 20px 0;
+    border-radius: 10px;
+    height: 500px;
+    background-color: #f7f7f7;
+    box-shadow: inset 0 5px 5px #e0e0e0;
+}
+
 li {
-    margin: 5px 0;
+    padding: 10px 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+li:nth-child(odd) {
+    background: white;
+}
+
+li:nth-child(even) {
+    background: #f0f0f0;
+}
+
+li:first-child {
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+li:last-child {
+    box-shadow: 0 5px 5px #e0e0e0;
+}
+
+li:hover {
+    background: #f6f6f6;
 }

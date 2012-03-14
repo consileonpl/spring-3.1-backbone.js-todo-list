@@ -29,13 +29,16 @@
 
             // Bind invocation of render if the 'reset' event
             // on tasks collection is raised
+            this.collection.on('add', this.render, this);
             this.collection.on('reset', this.render, this);
         },
 
         render: function() {
+            console.log("Render TasksView");
             $(this.el).html(this.template({
                 tasks: this.collection.toJSON()
             }));
+            $("#tasks").sortable();
             return this;
         }
     });
