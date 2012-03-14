@@ -41,3 +41,53 @@ table {
     border-collapse: collapse;
     border-spacing: 0;
 }
+
+/****************************************************/
+
+html {
+    background: #f7f7f7;
+    padding: 40px 0;
+    font-family: "sans-serif";
+}
+
+body {
+    width: 1000px;
+    margin: 0 auto;
+    padding: 50px;
+    background: white;
+    border-radius: 15px;
+    border: 1px solid #f0f0f0;
+}
+
+header h1 {
+    font-size: 2.5em;
+    color: #859BAB;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 2px #bbb;
+}
+
+footer {
+    text-align: center;
+    font-size: 0.6em;
+    margin-top: 40px;
+    color: #ccc;
+}
+
+form {
+    text-align: center;
+}
+
+input[type='text'] {
+    width: 90%;
+    background: #fafafa;
+    border: 1px solid #c0c0c0;
+    border-radius: 5px;
+    padding: 3px 5px;
+    font-size: 1.2em;
+    color: #999;
+    box-shadow: 0 5px 10px #e0e0e0 inset;
+}
+
+li {
+    margin: 5px 0;
+}

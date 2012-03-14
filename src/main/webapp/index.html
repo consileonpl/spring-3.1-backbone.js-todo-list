@@ -5,6 +5,19 @@
         <title>Todo List</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+
+        <script src="/assets/js/jquery-1.7.1.js"></script>
+        <script src="/assets/js/underscore.js"></script>
+        <script src="/assets/js/backbone.js"></script>
+        <script src="/assets/js/todo-list.js"></script>
+
+        <script type="text/template" id="tasks-template">
+            <ul id="tasks">
+                <% _.each(tasks, function(task) { %>
+                    <li><%= task.description %></li>
+                <% }); %>
+            </ul>
+        </script>
     </head>
 
     <body>
@@ -13,8 +26,13 @@
         </header>
     
         <section id="main">
-
+            <form id="new-task" action="/tasks" method="post">
+                <input type="text" />
+                <input type="Submit" value="Add" />
+            </form>
         </section>
+        
+        <div id="container"></div>
 
         <footer>
             &copy; 2012 Consileon Polska
