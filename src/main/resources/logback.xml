@@ -6,10 +6,10 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework" level="WARN" />
-    <logger name="org.springframework.web" level="DEBUG" />
+    <logger name="pl.consileon" level="DEBUG" />
+    <logger name="org.springframework.web" level="INFO" />
 
-    <root level="debug">
+    <root level="WARN">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

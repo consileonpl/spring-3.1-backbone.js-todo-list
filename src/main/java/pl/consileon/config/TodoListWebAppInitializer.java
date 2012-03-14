@@ -12,7 +12,7 @@ import javax.servlet.ServletRegistration;
 public class TodoListWebAppInitializer implements WebApplicationInitializer {
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext dispatcherContext = new AnnotationConfigWebApplicationContext();
-        dispatcherContext.register(WebConfig.class);
+        dispatcherContext.register(WebConfig.class, PersistenceConfig.class);
 
         ServletRegistration.Dynamic dispatcherServlet = servletContext.addServlet("dispatcher", new DispatcherServlet(dispatcherContext));
         dispatcherServlet.setLoadOnStartup(1);

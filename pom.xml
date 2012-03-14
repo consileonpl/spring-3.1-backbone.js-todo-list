@@ -45,6 +45,11 @@
 
         <!-- JPA/Persistence dependencies -->
         <dependency>
+        	<groupId>org.springframework.data</groupId>
+        	<artifactId>spring-data-jpa</artifactId>
+        	<version>1.0.3.RELEASE</version>
+        </dependency>
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-entitymanager</artifactId>
             <version>4.1.0.Final</version>
@@ -98,6 +103,8 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <version>2.1.1</version>
                 <configuration>
+                    <!-- By default maven's build fails to assembly WAR
+                         if web.xml is missing -->
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>

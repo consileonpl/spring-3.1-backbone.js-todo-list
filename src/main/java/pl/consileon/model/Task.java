@@ -11,8 +11,7 @@ public class Task {
     @Column
     private String description;
 
-    public Task(String description) {
-        this.description = description;
+    public Task() {
     }
 
     public String getDescription() {
