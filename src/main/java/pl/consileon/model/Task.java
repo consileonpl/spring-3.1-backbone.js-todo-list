@@ -9,9 +9,22 @@ public class Task {
     private Long id;
 
     @Column
+//    @NotBlank
     private String description;
 
     public Task() {
+    }
+
+    public Task(String description) {
+        this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Task{" +
+                "id=" + id +
+                ", description='" + description + '\'' +
+                '}';
     }
 
     public String getDescription() {

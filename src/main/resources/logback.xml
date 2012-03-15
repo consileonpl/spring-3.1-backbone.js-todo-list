@@ -1,15 +1,15 @@
 <configuration>
 
-    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
-    <logger name="pl.consileon" level="DEBUG" />
-    <logger name="org.springframework.web" level="INFO" />
+    <logger name="pl.consileon" level="debug" />
+    <logger name="org.springframework" level="debug" />
 
-    <root level="WARN">
-        <appender-ref ref="STDOUT"/>
+    <root level="warn">
+        <appender-ref ref="stdout"/>
     </root>
 </configuration>
