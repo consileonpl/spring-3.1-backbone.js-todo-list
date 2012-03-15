@@ -22,7 +22,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @Controller
-@RequestMapping(value = "/tasks", produces = "application/json")
+@RequestMapping(value = "/api/v1/tasks", produces = "application/json")
 @Transactional
 public class TasksController {
     private static final Logger LOGGER = LoggerFactory.getLogger(TasksController.class);
