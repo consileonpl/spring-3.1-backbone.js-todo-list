@@ -37,10 +37,10 @@ public class TasksController {
         return tasksRepository.findAll();
     }
 
-    @RequestMapping(method = POST, consumes = "application/x-www-form-urlencoded")
+    @RequestMapping(method = POST, consumes = "application/json")
     @ResponseBody
-    public Task create(String description) {
-        LOGGER.info("Create new task with description: '{}'", description);
-        return tasksRepository.save(new Task(description));
+    public Task create(@RequestBody Task task) {
+        LOGGER.info("Create new task: '{}'", task);
+        return tasksRepository.save(task);
     }
 }

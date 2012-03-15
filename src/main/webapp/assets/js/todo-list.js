@@ -1,4 +1,4 @@
-(function($) {
+$(function() {
 
     window.Task = Backbone.Model.extend({
         description: function() {
@@ -9,10 +9,6 @@
     window.Tasks = Backbone.Collection.extend({
         model: Task,
         url: "/tasks",
-
-        initialize: function() {
-            this.fetch();
-        }
     });
 
     window.tasks = new Tasks();
@@ -31,6 +27,9 @@
             // on tasks collection is raised
             this.collection.on('add', this.render, this);
             this.collection.on('reset', this.render, this);
+
+            // Fetch data from the backend
+            this.collection.fetch();
         },
 
         render: function() {
@@ -60,12 +59,10 @@
         }
     });
 
-    $(document).ready(function() {
-        window.App = new TodoList();
-        Backbone.history.start({
-            pushState: false
-        });
-        window.App.home();
+    window.App = new TodoList();
+    Backbone.history.start({
+        pushState: false
     });
+    window.App.home();
 
-})(jQuery);
+});

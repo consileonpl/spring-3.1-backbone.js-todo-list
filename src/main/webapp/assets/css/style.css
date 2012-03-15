@@ -47,7 +47,7 @@ table {
 html {
     background: #f7f7f7;
     padding: 40px 0;
-    font-family: "sans-serif";
+    font-family: Helvetica, sans-serif;
 }
 
 body {
@@ -57,9 +57,11 @@ body {
     background: white;
     border-radius: 15px;
     border: 1px solid #c0c0c0;
+    box-shadow: 0 5px 10px #e0e0e0;
 }
 
 header h1 {
+    text-align: center;
     font-size: 2.5em;
     color: #859BAB;
     margin-bottom: 30px;
@@ -73,19 +75,27 @@ footer {
     color: #999;
 }
 
-form {
-    text-align: center;
-}
-
 input[type='text'] {
-    width: 90%;
-    background: #fafafa;
+    width: 98%;
+    background: #f7f7f7;
     border: 1px solid #c0c0c0;
     border-radius: 5px;
     padding: 3px 5px;
     font-size: 1.2em;
     color: #999;
-    box-shadow: 0 5px 10px #e0e0e0 inset;
+    box-shadow: 0 5px 5px #e0e0e0 inset;
+}
+
+input[type='text']:focus {
+    box-shadow: 0 0 5px #859BAB;
+}
+
+::-webkit-input-placeholder {
+    opacity: 0.4;
+}
+
+:-moz-placeholder {
+    opacity: 0.4;
 }
 
 ul {

@@ -8,6 +8,7 @@
 
         <script src="/assets/js/jquery-1.7.1.js"></script>
         <script src="/assets/js/jquery-ui-1.8.18.js"></script>
+        <script src="/assets/js/json2.js"></script>
         <script src="/assets/js/underscore.js"></script>
         <script src="/assets/js/backbone.js"></script>
         <script src="/assets/js/todo-list.js"></script>
@@ -27,13 +28,11 @@
         </header>
     
         <section id="main">
-            <form id="new-task" action="/tasks" method="post">
-                <input type="text" name="description" />
-                <input type="submit" value="Add" />
-            </form>
+            <div>
+                <input id="create-task" type="text" placeholder="Create new task..." />
+            </div>
+            <div id="container"></div>
         </section>
-        
-        <div id="container"></div>
 
         <footer>
             &copy; 2012 Consileon Polska

@@ -12,13 +12,6 @@ public class Task {
 //    @NotBlank
     private String description;
 
-    public Task() {
-    }
-
-    public Task(String description) {
-        this.description = description;
-    }
-
     @Override
     public String toString() {
         return "Task{" +
