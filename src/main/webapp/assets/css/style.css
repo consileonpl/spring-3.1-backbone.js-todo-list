@@ -173,5 +173,5 @@ ul#tasks {
 }
 
 #tasks li.done .done-task {
-    opacity: 0.8;
+    opacity: 1;
 }

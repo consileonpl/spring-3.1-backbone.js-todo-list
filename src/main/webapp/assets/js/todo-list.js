@@ -92,14 +92,25 @@ $(function() {
         }
     });
 
-    // View responsible for rendering tasks list
-    window.TasksView = Backbone.View.extend({
-        tagName: 'ul',
-        id: 'tasks',
+    // View responsible for the overall layout. Main purpose of
+    // this view is to render all subviews and bind to certain
+    // events on view (like creating new task). This view is
+    // not rendered from the template. It bounds itself to
+    // existing view's body, and register event listeners.
+    window.HomeView = Backbone.View.extend({
+        // Attach view to the whole body, we do not render template
+        // for this view.
+        el: $("body"),
+
+        events: {
+            "keypress #create-task": "createTask"
+        },
 
         initialize: function() {
             // Bind render method to this object
-            _.bindAll(this, 'render');
+            _.bindAll(this, 'render', 'createTask', 'renderTask');
+
+            this.input = $("#create-task");
 
             // Bind invocation of render if the 'reset' event
             // on tasks collection is raised
@@ -120,34 +131,6 @@ $(function() {
                 model: task
             });
             this.$("ul").append(view.render().el);
-        }
-    });
-
-    // View responsible for the overall layout. Main purpose of
-    // this view is to render all subviews and bind to certain
-    // events on view (like creating new task). This view is
-    // not rendered from the template. It bounds itself to
-    // existing view's body, and register event listeners.
-    window.HomeView = Backbone.View.extend({
-        // Attach view to the whole body, we do not render template
-        // for this view.
-        el: $("body"),
-
-        events: {
-            "keypress #create-task": "createTask"
-        },
-
-        initialize: function() {
-            this.tasksView = new TasksView({
-                collection: window.tasks
-            });
-            this.input = $("#create-task");
-        },
-
-        render: function() {
-            $("#container").empty();
-            $("#container").append(this.tasksView.render().el);
-            return this;
         },
 
         createTask: function(e) {
@@ -190,7 +173,9 @@ $(function() {
         },
 
         initialize: function() {
-            this.homeView = new HomeView();
+            this.homeView = new HomeView({
+                collection: window.tasks
+            });
         },
 
         home: function() {
