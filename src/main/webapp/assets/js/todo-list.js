@@ -4,8 +4,6 @@ $(function() {
 
     // Represents single task
     window.Task = Backbone.Model.extend({
-        url: "/api/v1/tasks",
-
         defaults: {
             done: false
         },

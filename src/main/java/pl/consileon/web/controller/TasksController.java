@@ -17,6 +17,8 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.CREATED;
+import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
@@ -36,6 +38,7 @@ public class TasksController {
     }
 
     @RequestMapping(method = POST, consumes = "application/json")
+    @ResponseStatus(CREATED)
     @ResponseBody
     public Task create(@Valid @RequestBody Task task) {
         LOGGER.info("Create new task: '{}'", task);
@@ -46,17 +49,19 @@ public class TasksController {
         return tasksRepository.save(task);
     }
 
-    @RequestMapping(method = PUT, consumes = "application/json")
+    @RequestMapping(value = "{id}", method = PUT, consumes = "application/json")
+    @ResponseStatus(OK)
     @ResponseBody
-    public Task update(@Valid @RequestBody Task task) {
+    public Task update(@Valid @RequestBody Task task, @PathVariable Long id) {
         LOGGER.info("Update task: '{}'", task);
         return tasksRepository.save(task);
     }
 
-    @RequestMapping(method = DELETE, consumes = "application/json")
-    public void destroy(@Valid @RequestBody Task task) {
-        LOGGER.info("Update task: '{}'", task);
-        tasksRepository.delete(task);
+    @RequestMapping(value = "{id}", method = DELETE)
+    @ResponseStatus(OK)
+    public void destroy(@PathVariable Long id) {
+        LOGGER.info("Remove task: '{}'", id);
+        tasksRepository.delete(id);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
