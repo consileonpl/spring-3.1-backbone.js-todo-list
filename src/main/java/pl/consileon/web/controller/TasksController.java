@@ -5,19 +5,18 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
+import org.springframework.web.bind.annotation.*;
 import pl.consileon.model.Task;
 import pl.consileon.repository.TasksRepository;
+import pl.consileon.web.api.Notification;
 
 import javax.validation.Valid;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
+import static java.lang.String.format;
+import static org.springframework.http.HttpStatus.BAD_REQUEST;
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
@@ -41,6 +40,25 @@ public class TasksController {
     @ResponseBody
     public Task create(@Valid @RequestBody Task task) {
         LOGGER.info("Create new task: '{}'", task);
+        if (tasksRepository.findByDescription(task.getDescription()) != null) {
+            LOGGER.info("Cannot create task. Another task with given description already exists.");
+            throw new DescriptionUniquenessViolationException(task.getDescription());
+        }
         return tasksRepository.save(task);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    @ResponseStatus(BAD_REQUEST)
+    @ResponseBody
+    public Notification onMethodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        FieldError error = ex.getBindingResult().getFieldError();
+        return new Notification(error.getField() + " " + error.getDefaultMessage());
+    }
+
+    @ExceptionHandler(DescriptionUniquenessViolationException.class)
+    @ResponseStatus(BAD_REQUEST)
+    @ResponseBody
+    public Notification onMethodArgumentNotValidException(DescriptionUniquenessViolationException ex) {
+        return new Notification(format("Tasks with description '%s' already exists", ex.getDescription()));
     }
 }

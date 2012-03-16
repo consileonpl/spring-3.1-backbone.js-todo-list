@@ -91,10 +91,14 @@ $(function() {
 
                     // callback invoked when the backed refuse
                     // to save model
-                    error: function() {
+                    error: function(model, resp) {
+                        // Parse error message from response content
+                        var msg = JSON.parse(resp.responseText).content;
+
+                        // Create notification
                         notices.notify('create', {
                             title: "Create failed",
-                            text: "Server refuse to create task. Try another one."
+                            text: msg
                         })
                     }
                 });
@@ -103,6 +107,9 @@ $(function() {
         }
     });
 
+    // Application router. Technically it is not required for
+    // this app, while it consist of only one page. However it
+    // is added to show how Backbone.js deals with routing.
     window.TodoList = Backbone.Router.extend({
         routes: {
             '': "home"
