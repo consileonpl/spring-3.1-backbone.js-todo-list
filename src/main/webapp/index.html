@@ -5,9 +5,11 @@
         <title>Todo List</title>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/ui.notify.css"/>
 
         <script src="/assets/js/jquery-1.7.1.js"></script>
         <script src="/assets/js/jquery-ui-1.8.18.js"></script>
+        <script src="/assets/js/jquery.notify.js"></script>
         <script src="/assets/js/json2.js"></script>
         <script src="/assets/js/underscore.js"></script>
         <script src="/assets/js/backbone.js"></script>
@@ -32,6 +34,13 @@
                 <input id="create-task" type="text" placeholder="Create new task..." />
             </div>
             <div id="container"></div>
+            <div id="notices" style="display:hidden">
+                <div id="notice-template">
+                    <a class="ui-notify-cross ui-notify-close" href="#">x</a>
+                    <h1>#{title}</h1>
+                    <p>#{text}</p>
+                </div>
+            </div>
         </section>
 
         <footer>

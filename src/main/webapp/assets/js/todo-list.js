@@ -1,5 +1,7 @@
 $(function() {
 
+    window.notices = $("#notices");
+
     // Represents single task
     window.Task = Backbone.Model.extend({
         url: "/api/v1/tasks",
@@ -83,7 +85,18 @@ $(function() {
                 tasks.create({
                     description: description
                 }, {
-                    wait: true
+                    // wait for server response, before adding
+                    // model to collection
+                    wait: true,
+
+                    // callback invoked when the backed refuse
+                    // to save model
+                    error: function() {
+                        notices.notify('create', {
+                            title: "Create failed",
+                            text: "Server refuse to create task. Try another one."
+                        })
+                    }
                 });
                 this.input.val('');
             }
@@ -110,5 +123,11 @@ $(function() {
         pushState: true
     });
     window.App.home();
+
+    // Init jQuery notify plugin
+    notices.notify({
+        speed: 250,
+        expires: 3000
+    });
 
 });
