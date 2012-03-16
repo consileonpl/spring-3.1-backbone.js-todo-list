@@ -48,7 +48,7 @@ public class PersistenceConfig {
         entityManagerFactoryBean.setDataSource(createDataSourceBean());
         entityManagerFactoryBean.setPackagesToScan("pl.consileon.model");
         entityManagerFactoryBean.setJpaVendorAdapter(createJpaVendorAdapterBean());
-//        entityManagerFactoryBean.setJpaProperties(createJpaProperties());
+        entityManagerFactoryBean.setJpaProperties(createJpaProperties());
 
         return entityManagerFactoryBean;
     }
@@ -56,7 +56,7 @@ public class PersistenceConfig {
     private Properties createJpaProperties() {
         return new Properties() {
             {
-                setProperty("hibernate.hbm2ddl.auto", "update");
+                setProperty("hibernate.hbm2ddl.auto", "create-drop");
                 setProperty("hibernate.show_sql", "true");
             }
         };

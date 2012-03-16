@@ -39,7 +39,7 @@ public class TasksController {
 
     @RequestMapping(method = POST, consumes = "application/json")
     @ResponseBody
-    public Task create(@RequestBody Task task) {
+    public Task create(@Valid @RequestBody Task task) {
         LOGGER.info("Create new task: '{}'", task);
         return tasksRepository.save(task);
     }

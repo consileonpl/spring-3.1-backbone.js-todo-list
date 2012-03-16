@@ -78,11 +78,13 @@ $(function() {
             // Process only on return pressed
             if (e.keyCode == 13) {
                 var description = this.input.val();
-                var task = new Task({
-                   description: description
+                // create new task model, save to the backend
+                // and add to collection if saved
+                tasks.create({
+                    description: description
+                }, {
+                    wait: true
                 });
-                task.save();
-                window.tasks.add(task);
                 this.input.val('');
             }
         }

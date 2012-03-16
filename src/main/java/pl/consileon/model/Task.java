@@ -1,5 +1,7 @@
 package pl.consileon.model;
 
+import org.hibernate.validator.constraints.NotBlank;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,8 +10,8 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-//    @NotBlank
+    @Column(unique = true)
+    @NotBlank
     private String description;
 
     @Override
