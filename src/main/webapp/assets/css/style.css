@@ -132,3 +132,40 @@ li:last-child {
 li:hover {
     background: #f6f6f6;
 }
+
+#tasks li {
+    position: relative;
+}
+
+#tasks .icon {
+    position: absolute;
+    top: 6px;
+    opacity: 0.3;
+    display: none;
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+
+#tasks .task-remove {
+    right: 20px;
+    background: url('/assets/img/remove.png') no-repeat;
+}
+
+#tasks .task-edit {
+    right: 44px;
+    background: url('/assets/img/edit.png') no-repeat;
+}
+
+#tasks .task-done {
+    right: 68px;
+    background: url('/assets/img/done.png') no-repeat;
+}
+
+#tasks li:hover .icon {
+    display: block;
+}
+
+#tasks .icon:hover {
+    opacity: 0.5;
+}

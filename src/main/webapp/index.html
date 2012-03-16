@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-        
+
 <html>
     <head>
         <title>Todo List</title>
@@ -18,7 +18,12 @@
         <script type="content/template" id="tasks-template">
             <ul id="tasks">
                 <% _.each(tasks, function(task) { %>
-                    <li><%= task.description %></li>
+                    <li>
+                        <span><%= task.description %></span>
+                        <span class="icon task-done"></span>
+                        <span class="icon task-edit"></span>
+                        <span class="icon task-remove"></span>
+                    </li>
                 <% }); %>
             </ul>
         </script>
@@ -28,7 +33,7 @@
         <header>
             <h1>Todo List</h1>
         </header>
-    
+
         <section id="main">
             <div>
                 <input id="create-task" type="text" placeholder="Create new task..." />
