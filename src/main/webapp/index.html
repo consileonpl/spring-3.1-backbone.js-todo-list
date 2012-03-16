@@ -15,17 +15,11 @@
         <script src="/assets/js/backbone.js"></script>
         <script src="/assets/js/todo-list.js"></script>
 
-        <script type="content/template" id="tasks-template">
-            <ul id="tasks">
-                <% _.each(tasks, function(task) { %>
-                    <li>
-                        <span><%= task.description %></span>
-                        <span class="icon task-done"></span>
-                        <span class="icon task-edit"></span>
-                        <span class="icon task-remove"></span>
-                    </li>
-                <% }); %>
-            </ul>
+        <script type="content/template" id="task-template">
+            <%= description %>
+            <span class="icon done-task"></span>
+            <span class="icon edit-task"></span>
+            <span class="icon remove-task"></span>
         </script>
     </head>
 

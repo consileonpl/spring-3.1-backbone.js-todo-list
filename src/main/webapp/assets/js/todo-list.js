@@ -6,8 +6,29 @@ $(function() {
     window.Task = Backbone.Model.extend({
         url: "/api/v1/tasks",
 
+        defaults: {
+            done: false
+        },
+
+        // Return task's description
         description: function() {
             return this.get('description');
+        },
+
+        // Return task's done flag
+        done: function() {
+            return this.get('done');
+        },
+
+        // Toggle task's 'done' flag. Operation
+        // is saved to the backend server.
+        toggle: function(options) {
+            this.save({
+                done: !this.get('done')
+            }, {
+                // Wait for server response
+                wait: true
+            }, options)
         }
     });
 
@@ -19,20 +40,72 @@ $(function() {
 
     window.tasks = new Tasks();
 
+    // View responsible for rendering single task
+    // on list
+    window.TaskView = Backbone.View.extend({
+        tagName: 'li',
+        className: 'task',
+
+        events: {
+            "click .done-task": "toggleDone",
+            "click .remove-task": "removeTask"
+        },
+
+        initialize: function() {
+            // Bind render method to this object
+            _.bindAll(this,
+                'render',
+                'remove',
+                'updateState',
+                'toggleDone',
+                'removeTask');
+
+            // Bind to template
+            this.template = _.template($("#task-template").html());
+
+            // Bind to model events
+            this.model.on('change', this.render, this);
+        },
+
+        render: function() {
+            $(this.el).html(this.template(this.model.toJSON()));
+            this.updateState();
+            return this;
+        },
+
+        remove: function() {
+            $(this.el).remove();
+        },
+
+        updateState: function() {
+            $(this.el).toggleClass("done", this.model.done());
+        },
+
+        toggleDone: function() {
+            this.model.toggle({
+                success: this.updateState
+            });
+        },
+
+        removeTask: function() {
+            this.model.destroy({
+                success: this.remove
+            });
+        }
+    });
+
     // View responsible for rendering tasks list
     window.TasksView = Backbone.View.extend({
-        tagName: 'section',
+        tagName: 'ul',
+        id: 'tasks',
 
         initialize: function() {
             // Bind render method to this object
             _.bindAll(this, 'render');
 
-            // Get the template that will be rendered
-            this.template = _.template($('#tasks-template').html());
-
             // Bind invocation of render if the 'reset' event
             // on tasks collection is raised
-            this.collection.on('add', this.render, this);
+            this.collection.on('add', this.renderTask, this);
             this.collection.on('reset', this.render, this);
 
             // Fetch data from the backend
@@ -40,12 +113,15 @@ $(function() {
         },
 
         render: function() {
-            console.log("Render TasksView");
-            $(this.el).html(this.template({
-                tasks: this.collection.toJSON()
-            }));
-            $("#tasks").sortable();
+            this.collection.each(this.renderTask);
             return this;
+        },
+
+        renderTask: function(task) {
+            var view = new TaskView({
+                model: task
+            });
+            this.$("ul").append(view.render().el);
         }
     });
 

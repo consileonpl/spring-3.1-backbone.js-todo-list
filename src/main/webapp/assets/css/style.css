@@ -98,7 +98,7 @@ input[type='text']:focus {
     opacity: 0.4;
 }
 
-ul {
+ul#tasks {
     border: 1px solid #c0c0c0;
     margin: 20px 0;
     border-radius: 10px;
@@ -107,34 +107,36 @@ ul {
     box-shadow: inset 0 5px 5px #e0e0e0;
 }
 
-li {
+#tasks li {
     padding: 10px 40px;
     border-bottom: 1px solid #e0e0e0;
+    position: relative;
 }
 
-li:nth-child(odd) {
+#tasks li:nth-child(odd) {
     background: white;
 }
 
-li:nth-child(even) {
+#tasks li:nth-child(even) {
     background: #f0f0f0;
 }
 
-li:first-child {
+#tasks li:first-child {
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
 }
 
-li:last-child {
+#tasks li:last-child {
     box-shadow: 0 5px 5px #e0e0e0;
 }
 
-li:hover {
+#tasks li:hover {
     background: #f6f6f6;
 }
 
-#tasks li {
-    position: relative;
+#tasks li.done {
+    text-decoration: line-through;
+    color: #c0c0c0;
 }
 
 #tasks .icon {
@@ -147,17 +149,17 @@ li:hover {
     height: 24px;
 }
 
-#tasks .task-remove {
+#tasks .remove-task {
     right: 20px;
     background: url('/assets/img/remove.png') no-repeat;
 }
 
-#tasks .task-edit {
+#tasks .edit-task {
     right: 44px;
     background: url('/assets/img/edit.png') no-repeat;
 }
 
-#tasks .task-done {
+#tasks .done-task {
     right: 68px;
     background: url('/assets/img/done.png') no-repeat;
 }
@@ -168,4 +170,8 @@ li:hover {
 
 #tasks .icon:hover {
     opacity: 0.5;
+}
+
+#tasks li.done .done-task {
+    opacity: 0.8;
 }
