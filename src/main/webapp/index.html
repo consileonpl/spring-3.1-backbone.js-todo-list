@@ -16,10 +16,15 @@
         <script src="/assets/js/todo-list.js"></script>
 
         <script type="content/template" id="task-template">
-            <%= description %>
-            <span class="icon done-task"></span>
-            <span class="icon edit-task"></span>
-            <span class="icon remove-task"></span>
+            <div class="show">
+                <%= description %>
+                <span class="icon done-task"></span>
+                <span class="icon edit-task"></span>
+                <span class="icon remove-task"></span>
+            </div>
+            <div class="edit">
+                <input type="text" />
+            </div>
         </script>
     </head>
 

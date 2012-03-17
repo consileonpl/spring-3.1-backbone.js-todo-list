@@ -170,8 +170,23 @@ ul#tasks {
 
 #tasks .icon:hover {
     opacity: 0.5;
+    background-color: #e4e4e4;
+    border-radius: 4px;
 }
 
 #tasks li.done .done-task {
     opacity: 1;
+}
+
+#tasks li.editing .edit-task {
+    opacity: 1;
+}
+
+#tasks li.editing .show,
+#tasks li .edit {
+    display: none;
+}
+
+#tasks li.editing .edit {
+    display: block;
 }

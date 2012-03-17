@@ -46,7 +46,8 @@ $(function() {
 
         events: {
             "click .done-task": "toggleDone",
-            "click .remove-task": "removeTask"
+            "click .remove-task": "removeTask",
+            "click .edit-task": "editTask"
         },
 
         initialize: function() {
@@ -56,7 +57,13 @@ $(function() {
                 'remove',
                 'updateState',
                 'toggleDone',
-                'removeTask');
+                'removeTask',
+                'editTask',
+                'updateTask',
+                'onEditTaskKeypress',
+                'notifyUpdateFailed',
+                'closeEditing'
+            );
 
             // Bind to template
             this.template = _.template($("#task-template").html());
@@ -77,6 +84,10 @@ $(function() {
 
         updateState: function() {
             $(this.el).toggleClass("done", this.model.done());
+
+            // Bind edit input
+            this.editInput = this.$("input");
+            this.editInput.val(this.model.description());
         },
 
         toggleDone: function() {
@@ -89,6 +100,57 @@ $(function() {
             this.model.destroy({
                 success: this.remove
             });
+        },
+
+        editTask: function() {
+            this.currentVal = this.model.description();
+            $(this.el).addClass("editing");
+            this.editInput.bind('blur', this.updateTask);
+            this.editInput.bind('keypress', this.onEditTaskKeypress);
+            this.editInput.focus();
+        },
+
+        updateTask: function() {
+            var newVal = this.editInput.val();
+            if (this.currentVal != newVal) {
+                this.model.save({
+                    description: newVal
+                }, {
+                    wait: true,
+                    success: this.closeEditing,
+                    error: this.notifyUpdateFailed
+                });
+            } else {
+                this.closeEditing();
+            }
+        },
+
+        onEditTaskKeypress: function(e) {
+            if (e.keyCode == 13) {
+                // Update on enter
+                this.updateTask();
+            } else if (e.keyCode == 27) {
+                // Close edit input on ESC
+                this.editInput.val(this.currentVal);
+                this.closeEditing();
+            }
+        },
+
+        notifyUpdateFailed: function(model, resp) {
+            // Parse error message from response content
+            var msg = JSON.parse(resp.responseText).content;
+
+            // Create notification
+            notices.notify('create', {
+                title: "Create failed",
+                text: msg
+            });
+
+            this.editInput.focus();
+        },
+
+        closeEditing: function() {
+            $(this.el).removeClass("editing");
         }
     });
 
@@ -103,12 +165,17 @@ $(function() {
         el: $("body"),
 
         events: {
-            "keypress #create-task": "createTask"
+            "keypress #create-task": "createTaskOnEnter"
         },
 
         initialize: function() {
             // Bind render method to this object
-            _.bindAll(this, 'render', 'createTask', 'renderTask');
+            _.bindAll(this,
+                'render',
+                'createTask',
+                'createTaskOnEnter',
+                'renderTask'
+            );
 
             this.input = $("#create-task");
 
@@ -123,6 +190,7 @@ $(function() {
 
         render: function() {
             this.collection.each(this.renderTask);
+            this.$("ul").sortable();
             return this;
         },
 
@@ -133,33 +201,37 @@ $(function() {
             this.$("ul").append(view.render().el);
         },
 
-        createTask: function(e) {
+        createTask: function() {
+            var description = this.input.val();
+            // create new task model, save to the backend
+            // and add to collection if saved
+            tasks.create({
+                description: description
+            }, {
+                // wait for server response, before adding
+                // model to collection
+                wait: true,
+
+                // callback invoked when the backed refuse
+                // to save model
+                error: function(model, resp) {
+                    // Parse error message from response content
+                    var msg = JSON.parse(resp.responseText).content;
+
+                    // Create notification
+                    notices.notify('create', {
+                        title: "Create failed",
+                        text: msg
+                    });
+                }
+            });
+            this.input.val('');
+        },
+
+        createTaskOnEnter: function(e) {
             // Process only on return pressed
             if (e.keyCode == 13) {
-                var description = this.input.val();
-                // create new task model, save to the backend
-                // and add to collection if saved
-                tasks.create({
-                    description: description
-                }, {
-                    // wait for server response, before adding
-                    // model to collection
-                    wait: true,
-
-                    // callback invoked when the backed refuse
-                    // to save model
-                    error: function(model, resp) {
-                        // Parse error message from response content
-                        var msg = JSON.parse(resp.responseText).content;
-
-                        // Create notification
-                        notices.notify('create', {
-                            title: "Create failed",
-                            text: msg
-                        })
-                    }
-                });
-                this.input.val('');
+                this.createTask();
             }
         }
     });

@@ -54,6 +54,10 @@ public class TasksController {
     @ResponseBody
     public Task update(@Valid @RequestBody Task task, @PathVariable Long id) {
         LOGGER.info("Update task: '{}'", task);
+        if (tasksRepository.findByDescription(task.getDescription()) != null) {
+            LOGGER.info("Cannot update task. Another task with given description already exists.");
+            throw new DescriptionUniquenessViolationException(task.getDescription());
+        }
         return tasksRepository.save(task);
     }
 
