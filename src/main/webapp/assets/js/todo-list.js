@@ -106,7 +106,7 @@ $(function() {
             this.currentVal = this.model.description();
             $(this.el).addClass("editing");
             this.editInput.bind('blur', this.updateTask);
-            this.editInput.bind('keypress', this.onEditTaskKeypress);
+//            this.editInput.bind('keypress', this.onEditTaskKeypress);
             this.editInput.focus();
         },
 
