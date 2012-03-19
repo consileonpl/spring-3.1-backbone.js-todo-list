@@ -20,7 +20,7 @@ $(function() {
 
         // Toggle task's 'done' flag. Operation
         // is saved to the backend server.
-        toogleDone: function(options) {
+        toggleDone: function() {
             this.save({
                 done: !this.get('done')
             });
@@ -52,13 +52,12 @@ $(function() {
             // Bind render method to this object
             _.bindAll(this,
                 'render',
-                'remove',
+                'slideAndRemove',
                 'updateState',
                 'toggleDone',
                 'removeTask',
                 'editTask',
                 'updateTask',
-                'onEditTaskKeypress',
                 'notifyUpdateFailed',
                 'closeEditing'
             );
@@ -76,8 +75,10 @@ $(function() {
             return this;
         },
 
-        remove: function() {
-            $(this.el).remove();
+        slideAndRemove: function() {
+            $(this.el).slideUp(250, function() {
+                $(this).remove();
+            });
         },
 
         updateState: function() {
@@ -89,12 +90,12 @@ $(function() {
         },
 
         toggleDone: function() {
-            this.model.toogleDone();
+            this.model.toggleDone();
         },
 
         removeTask: function() {
             this.model.destroy({
-                success: this.remove
+                success: this.slideAndRemove
             });
         },
 
@@ -102,7 +103,6 @@ $(function() {
             this.currentVal = this.model.description();
             $(this.el).addClass("editing");
             this.editInput.bind('blur', this.updateTask);
-//            this.editInput.bind('keypress', this.onEditTaskKeypress);
             this.editInput.focus();
         },
 
@@ -117,17 +117,6 @@ $(function() {
                     error: this.notifyUpdateFailed
                 });
             } else {
-                this.closeEditing();
-            }
-        },
-
-        onEditTaskKeypress: function(e) {
-            if (e.keyCode == 13) {
-                // Update on enter
-                this.updateTask();
-            } else if (e.keyCode == 27) {
-                // Close edit input on ESC
-                this.editInput.val(this.currentVal);
                 this.closeEditing();
             }
         },

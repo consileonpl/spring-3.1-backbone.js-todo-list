@@ -105,10 +105,12 @@ ul#tasks {
     height: 500px;
     background-color: #f7f7f7;
     box-shadow: inset 0 5px 5px #e0e0e0;
+    overflow: hidden;
+    z-index: 10;
 }
 
 #tasks li {
-    padding: 10px 40px;
+    padding: 10px 50px;
     border-bottom: 1px solid #e0e0e0;
     position: relative;
 }
@@ -142,7 +144,7 @@ ul#tasks {
 #tasks .icon {
     position: absolute;
     top: 6px;
-    opacity: 0.3;
+    opacity: 0.2;
     display: none;
     cursor: pointer;
     width: 24px;
@@ -160,7 +162,8 @@ ul#tasks {
 }
 
 #tasks .done-task {
-    right: 68px;
+    left: 20px;
+    display: block;
     background: url('/assets/img/done.png') no-repeat;
 }
 
