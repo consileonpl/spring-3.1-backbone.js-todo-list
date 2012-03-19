@@ -20,13 +20,10 @@ $(function() {
 
         // Toggle task's 'done' flag. Operation
         // is saved to the backend server.
-        toggle: function(options) {
+        toogleDone: function(options) {
             this.save({
                 done: !this.get('done')
-            }, {
-                // Wait for server response
-                wait: true
-            }, options)
+            });
         }
     });
 
@@ -47,7 +44,8 @@ $(function() {
         events: {
             "click .done-task": "toggleDone",
             "click .remove-task": "removeTask",
-            "click .edit-task": "editTask"
+            "click .edit-task": "editTask",
+            "dblclick .show": "editTask"
         },
 
         initialize: function() {
@@ -91,9 +89,7 @@ $(function() {
         },
 
         toggleDone: function() {
-            this.model.toggle({
-                success: this.updateState
-            });
+            this.model.toogleDone();
         },
 
         removeTask: function() {

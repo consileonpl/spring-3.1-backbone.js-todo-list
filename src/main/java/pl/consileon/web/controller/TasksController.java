@@ -56,7 +56,7 @@ public class TasksController {
         LOGGER.info("Update task: '{}'", task);
         // check if there is another task with same description
         Task other = tasksRepository.findByDescription(task.getDescription());
-        if (!other.getId().equals(id)) {
+        if (other != null && !other.getId().equals(id)) {
             LOGGER.info("Cannot update task. Another task with given description already exists.");
             throw new DescriptionUniquenessViolationException(task.getDescription());
         }
