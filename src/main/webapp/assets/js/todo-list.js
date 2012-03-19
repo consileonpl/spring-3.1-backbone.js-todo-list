@@ -70,19 +70,19 @@ $(function() {
         },
 
         render: function() {
-            $(this.el).html(this.template(this.model.toJSON()));
+            this.$el.html(this.template(this.model.toJSON()));
             this.updateState();
             return this;
         },
 
         slideAndRemove: function() {
-            $(this.el).slideUp(250, function() {
+            this.$el.slideUp(250, function() {
                 $(this).remove();
             });
         },
 
         updateState: function() {
-            $(this.el).toggleClass("done", this.model.done());
+            this.$el.toggleClass("done", this.model.done());
 
             // Bind edit input
             this.editInput = this.$("input");
@@ -101,7 +101,7 @@ $(function() {
 
         editTask: function() {
             this.currentVal = this.model.description();
-            $(this.el).addClass("editing");
+            this.$el.addClass("editing");
             this.editInput.bind('blur', this.updateTask);
             this.editInput.focus();
         },
@@ -135,7 +135,7 @@ $(function() {
         },
 
         closeEditing: function() {
-            $(this.el).removeClass("editing");
+            this.$el.removeClass("editing");
         }
     });
 
@@ -162,7 +162,9 @@ $(function() {
                 'renderTask'
             );
 
-            this.input = $("#create-task");
+            // Wrap view elements
+            this.inputEl = $("#create-task");
+            this.tasksEl = $("ul");
 
             // Bind invocation of render if the 'reset' event
             // on tasks collection is raised
@@ -175,7 +177,7 @@ $(function() {
 
         render: function() {
             this.collection.each(this.renderTask);
-            this.$("ul").sortable();
+            this.tasksEl.sortable();
             return this;
         },
 
@@ -183,11 +185,11 @@ $(function() {
             var view = new TaskView({
                 model: task
             });
-            this.$("ul").append(view.render().el);
+            this.tasksEl.append(view.render().el);
         },
 
         createTask: function() {
-            var description = this.input.val();
+            var description = this.inputEl.val();
             // create new task model, save to the backend
             // and add to collection if saved
             tasks.create({
@@ -210,7 +212,7 @@ $(function() {
                     });
                 }
             });
-            this.input.val('');
+            this.inputEl.val('');
         },
 
         createTaskOnEnter: function(e) {

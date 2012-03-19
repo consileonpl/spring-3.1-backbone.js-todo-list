@@ -45,7 +45,7 @@ table {
 /****************************************************/
 
 html {
-    background: #f7f7f7;
+    background: #F7F7F7;
     padding: 40px 0;
     font-family: Helvetica, sans-serif;
 }
@@ -99,12 +99,12 @@ input[type='text']:focus {
 }
 
 ul#tasks {
-    border: 1px solid #c0c0c0;
+    border: 1px solid #C0C0C0;
     margin: 20px 0;
     border-radius: 10px;
     height: 500px;
-    background-color: #f7f7f7;
-    box-shadow: inset 0 5px 5px #e0e0e0;
+    background-color: #F7F7F7;
+    box-shadow: inset 0 5px 10px #e0e0e0;
     overflow: hidden;
     z-index: 10;
 }
@@ -113,15 +113,16 @@ ul#tasks {
     padding: 10px 50px;
     border-bottom: 1px solid #e0e0e0;
     position: relative;
+    background: #FAFAFA;
 }
 
-#tasks li:nth-child(odd) {
+/*#tasks li:nth-child(odd) {
     background: white;
 }
 
 #tasks li:nth-child(even) {
     background: #f0f0f0;
-}
+}*/
 
 #tasks li:first-child {
     border-top-left-radius: 10px;
@@ -129,7 +130,7 @@ ul#tasks {
 }
 
 #tasks li:last-child {
-    box-shadow: 0 5px 5px #e0e0e0;
+    box-shadow: 0 5px 10px #E0E0E0;
 }
 
 #tasks li:hover {
