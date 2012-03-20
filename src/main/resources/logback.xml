@@ -7,7 +7,7 @@
     </appender>
 
     <logger name="pl.consileon" level="debug" />
-    <logger name="org.springframework" level="debug" />
+    <logger name="org.springframework.web" level="info" />
 
     <root level="warn">
         <appender-ref ref="stdout"/>

@@ -8,7 +8,7 @@
     <packaging>war</packaging>
 
     <name>Todo List</name>
-    <url>http://github.com/consileonpl/todo-list</url>
+    <url>https://github.com/consileonpl/spring-3.1-backbone.js-todo-list</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
