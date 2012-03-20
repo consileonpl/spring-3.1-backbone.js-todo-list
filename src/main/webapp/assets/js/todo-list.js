@@ -178,6 +178,11 @@ $(function() {
         render: function() {
             this.collection.each(this.renderTask);
             this.tasksEl.sortable();
+            this.inputEl.tipsy({
+                fade: true,
+                trigger: 'focus',
+                gravity: 'w'
+            });
             return this;
         },
 

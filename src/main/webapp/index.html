@@ -6,21 +6,25 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
         <link rel="stylesheet" type="text/css" href="/assets/css/ui.notify.css"/>
+        <link rel="stylesheet" type="text/css" href="/assets/css/tipsy.css"/>
 
         <script src="/assets/js/lib/jquery-1.7.1.js"></script>
         <script src="/assets/js/lib/jquery-ui-1.8.18.js"></script>
         <script src="/assets/js/lib/jquery.notify.js"></script>
+        <script src="/assets/js/lib/jquery.tipsy.js"></script>
+
         <script src="/assets/js/lib/json2.js"></script>
         <script src="/assets/js/lib/underscore.js"></script>
         <script src="/assets/js/lib/backbone.js"></script>
+
         <script src="/assets/js/todo-list.js"></script>
 
         <script type="content/template" id="task-template">
             <div class="show">
                 <%= description %>
-                <span class="icon done-task"></span>
-                <span class="icon edit-task"></span>
-                <span class="icon remove-task"></span>
+                <span class="icon done-task" title="Toggle done"></span>
+                <span class="icon edit-task" title="Edit task"></span>
+                <span class="icon remove-task" title="Remove task"></span>
             </div>
             <div class="edit">
                 <input type="text" />
@@ -35,7 +39,7 @@
 
         <section id="main">
             <div>
-                <input id="create-task" type="text" placeholder="Create new task..." />
+                <input id="create-task" type="text" placeholder="Create new task..." title="Press enter to submit task" />
             </div>
             <ul id="tasks"></ul>
             <div id="notices" style="display:hidden">
@@ -48,7 +52,8 @@
         </section>
 
         <footer>
-            &copy; 2012 Consileon Polska
+            <div>created by Michał Orman</div>
+            <div>&copy; 2012 Consileon Polska</div>
         </footer>
     </body>
 </html>
