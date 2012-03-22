@@ -113,6 +113,28 @@
                     <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>com.github.searls</groupId>
+                <artifactId>jasmine-maven-plugin</artifactId>
+                <version>1.1.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jsSrcDir>${project.basedir}/src/main/webapp/assets/js</jsSrcDir>
+                    <sourceIncludes>
+                        <include>lib/jquery-1.7.1.js</include>
+                        <include>lib/json2.js</include>
+                        <include>lib/underscore.js</include>
+                        <include>lib/backbone.js</include>
+                        <include>*.js</include>
+                    </sourceIncludes>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
 </project>

@@ -4,6 +4,8 @@ $(function() {
 
     // Represents single task
     window.Task = Backbone.Model.extend({
+        url: "/api/v1/tasks",
+
         defaults: {
             done: false
         },
@@ -159,7 +161,8 @@ $(function() {
                 'render',
                 'createTask',
                 'createTaskOnEnter',
-                'renderTask'
+                'renderTask',
+                'updateOrder'
             );
 
             // Wrap view elements
@@ -177,13 +180,19 @@ $(function() {
 
         render: function() {
             this.collection.each(this.renderTask);
-            this.tasksEl.sortable();
+            this.tasksEl.sortable({
+                update: this.updateOrder
+            });
             this.inputEl.tipsy({
                 fade: true,
                 trigger: 'focus',
                 gravity: 'w'
             });
             return this;
+        },
+
+        updateOrder: function(e, ui) {
+            console.log("update order");
         },
 
         renderTask: function(task) {
