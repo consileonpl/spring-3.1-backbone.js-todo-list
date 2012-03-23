@@ -116,13 +116,13 @@ ul#tasks {
     background: #FAFAFA;
 }
 
-/*#tasks li:nth-child(odd) {
+#tasks li:nth-child(odd) {
     background: white;
 }
 
 #tasks li:nth-child(even) {
     background: #f0f0f0;
-}*/
+}
 
 #tasks li:first-child {
     border-top-left-radius: 10px;
