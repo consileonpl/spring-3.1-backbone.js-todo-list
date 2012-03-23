@@ -259,7 +259,7 @@ $(function() {
     // Bootstrap the application
     window.App = new TodoList();
     Backbone.history.start({
-        pushState: true
+        pushState: false
     });
     window.App.home();
 
