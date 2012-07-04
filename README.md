@@ -20,7 +20,7 @@ The application is Servlet 3.0 standard application, so it need to be
 deployed to Servlet 3.0 compatible environment (Application was tested on
 Tomcat 7).
 
-*The application needs to be deployed as context root*. This
+**The application needs to be deployed as context root**. This
  application serves static content (like CSS, JS files) from static
  `index.html` file therefore it doesn't dynamically update URL's for
  static content. Also Backbone's models and collections needs to have
